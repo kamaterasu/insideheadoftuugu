@@ -42,7 +42,7 @@ function addStar(){
 }
 Array(200).fill().forEach(addStar)
 
-
+app.use("/static", express.static('./static/'));
 
 const spaceTexture = new THREE.TextureLoader().load('space.jpg')
 scene.background = spaceTexture
