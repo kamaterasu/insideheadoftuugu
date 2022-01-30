@@ -51,7 +51,7 @@ const tuuguTexture = new THREE.TextureLoader().load('tuugu.jpg')
 const tuugu = new THREE.Mesh(
     new THREE.BoxGeometry(3,3,3),
     //new THREE.MeshBasicMaterial({map:tuuguTexture})
-    new THREE.MeshStandardMaterial(tuuguTexture))
+    new THREE.MeshStandardMaterial(tuuguTexture)
 )
 scene.add(tuugu)
 
