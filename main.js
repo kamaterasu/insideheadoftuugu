@@ -1,4 +1,4 @@
-import '/static/style.css';
+import './style.css';
 
 import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
 import {OrbitControls} from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js';
@@ -42,9 +42,9 @@ function addStar(){
 }
 Array(200).fill().forEach(addStar)
 
-const spaceTexture = new THREE.TextureLoader().load('./static/space.jpg')
+const spaceTexture = new THREE.TextureLoader().load('./space.jpg')
 scene.background = spaceTexture
-const tuuguTexture = new THREE.TextureLoader().load('./static/tuugu.jpg')
+const tuuguTexture = new THREE.TextureLoader().load('./tuugu.jpg')
 const tuugu = new THREE.Mesh(
     new THREE.BoxGeometry(3,3,3),
     //new THREE.MeshBasicMaterial({map:tuuguTexture})
@@ -52,7 +52,7 @@ const tuugu = new THREE.Mesh(
 )
 scene.add(tuugu)
 
-const moonTexture = new THREE.TextureLoader().load('./static/moon.jpg')
+const moonTexture = new THREE.TextureLoader().load('./moon.jpg')
 const moon = new THREE.Mesh(
     new THREE.SphereGeometry(3,32,32),
     new THREE.MeshStandardMaterial({
