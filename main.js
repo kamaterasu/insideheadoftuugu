@@ -45,7 +45,7 @@ Array(200).fill().forEach(addStar)
 
 
 const spaceTexture = new THREE.TextureLoader().load('space.jpg')
-scene.background = new THREE.MeshStandardMaterial({color:0x000000})
+scene.background = new THREE.MeshStandardMaterial(spaceTexture)
 
 const tuuguTexture = new THREE.TextureLoader().load('tuugu.jpg')
 const tuugu = new THREE.Mesh(
