@@ -1,4 +1,4 @@
-import '/style.css'
+import './style.css'
 
 import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
 import {OrbitControls} from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js';
@@ -41,8 +41,6 @@ function addStar(){
     scene.add(star)
 }
 Array(200).fill().forEach(addStar)
-
-app.use("/static", express.static('./static/'));
 
 const spaceTexture = new THREE.TextureLoader().load('space.jpg')
 scene.background = spaceTexture
