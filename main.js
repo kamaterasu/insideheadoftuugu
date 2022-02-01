@@ -1,81 +1,58 @@
 import './style.css';
 
-import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
+import * as THREE from 'three'
+//import * as THREE from 'https://unpkg.com/three@0.126.1/build/three.module.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import {OrbitControls} from 'https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js';
-//import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
+//import {GLTFLoader} from 'https://unpkg.com/three@0.126.1/examples/jsm/loaders/GLTFLoader.js'
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
 const renderer = new THREE.WebGLRenderer({
     canvas: document.querySelector('#bg'),
+    antialias:true,
 });
 
+const loader = new GLTFLoader()
+loader.load('assets/scene.gltf',function(gltf){
+    console.log(gltf)
+    const root =gltf.scene
+    root.scale.set(15,15,15)
+    root.translateY(-10)
+    root.rotateY(160)
+    scene.add(root)
+
+},function ( xhr ) {
+
+    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+})
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth,window.innerHeight);
 camera.position.setZ(30);
 
-const geometry = new THREE.TorusGeometry(10,3,16,100)
-const material = new THREE.MeshStandardMaterial({color:0xFDB813});
-const torus = new THREE.Mesh(geometry,material)
-scene.add(torus)
 
-const pointLight = new THREE.PointLight(0xffffff)
-pointLight.position.set(5,5,5)
+const pointLight = new THREE.PointLight(0xf92a82)
+pointLight.position.set(5,5,10)
 scene.add(pointLight)
 
-const ambientLight = new THREE.AmbientLight(0xffffff)
-scene.add(ambientLight)
+const ambientLight = new THREE.AmbientLight(0xFBC3B7)
+//scene.add(ambientLight)
 
 const lightHelper = new THREE.PointLightHelper(pointLight)
 const gridHelper = new THREE.GridHelper(200,50);
-scene.add(lightHelper,)//gridHelper)
+//scene.add(lightHelper,)//gridHelper)
 
 const controls = new OrbitControls(camera,renderer.domElement)
-
-function addStar(){
-    const geometry = new THREE.SphereGeometry(0.25,24,24)
-    const material = new THREE.MeshStandardMaterial({color:0xffffff})
-    const star = new THREE.Mesh(geometry,material)
-    const [x,y,z] = Array(3).fill().map(()=> THREE.MathUtils.randFloatSpread(100))
-    star.position.set(x,y,z);
-    scene.add(star)
-}
-Array(200).fill().forEach(addStar)
-
-const spaceTexture = new THREE.TextureLoader().load('./space.jpg')
-scene.background = spaceTexture
-const tuuguTexture = new THREE.TextureLoader().load('./tuugu.jpg')
-const tuugu = new THREE.Mesh(
-    new THREE.BoxGeometry(3,3,3),
-    //new THREE.MeshBasicMaterial({map:tuuguTexture})
-    new THREE.MeshStandardMaterial({color:0x000000})
-)
-scene.add(tuugu)
-
-const moonTexture = new THREE.TextureLoader().load('./moon.jpg')
-const moon = new THREE.Mesh(
-    new THREE.SphereGeometry(3,32,32),
-    new THREE.MeshStandardMaterial({
-        map:moonTexture
-    })
-)
-moon.position.z = -20;
-moon.position.setX(-40);
-moon.position.y = 30;
+scene.background = new THREE.Color(0x2e294e)
 
 
-scene.add(moon)
 
 function animate(){
     requestAnimationFrame(animate);
-    torus.rotation.x += 0.01;
-    torus.rotation.y += 0.005;
-    torus.rotation.z += 0.01;
-    moon.rotation.x += 0.01;
-    moon.rotation.y += 0.005;
-    moon.rotation.z += 0.01;
-    controls.update()
+    //controls.update()
     renderer.render(scene,camera)
+    
 }
 
 animate()
